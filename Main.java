@@ -66,24 +66,27 @@ public class StockLights {
 		
 		
 		WebDriver drive = new FirefoxDriver(options);
-		drive.get("https://robinhood.com/"); Thread.sleep(5000); LocalTime open = new
-		LocalTime("08:30:40"); LocalTime sleep = new LocalTime("15:00:02"); LocalTime
-		now = LocalTime.now(); Timer getValue = new Timer(); getValue.schedule(new
-		TimerTask() {
+	    Thread.sleep(5000); 
+        LocalTime open = new LocalTime("08:30:40"); 
+        LocalTime sleep = new LocalTime("15:00:02"); 
+        LocalTime now = LocalTime.now(); 
+        Timer getValue = new Timer(); 
+        getValue.schedule(new TimerTask() {
 		
 		@Override public void run() {
 		
-		if (now.isAfter(open) && now.isBefore(sleep)) { if
-		(LocalDate.now().getDayOfWeek() != 1 && LocalDate.now().getDayOfWeek() != 7)
-		{ String port = drive.findElement(By.xpath(
-		"//*[@id=\"react_root\"]/main/div[2]/div/div/div/div/div/main/div/div[1]/section[1]/header/div[2]/span[1]/span/span[1]"
-		)).getText(); if (port.contains("+")) {
-		room.setState(State.builder().color(Color.of(java.awt.Color.BLUE)).on());
-		room.setBrightness(254); System.out.println(port); } else if
-		(port.contains("-")) { room.setState(State.builder().color(Color.of(117, 2 ,
-		253)).on()); room.setBrightness(254);
-		
-		System.out.println(port);
+		if (now.isAfter(open) && now.isBefore(sleep)) { 
+            if (LocalDate.now().getDayOfWeek() != 1 && LocalDate.now().getDayOfWeek() != 7) { 
+                String port = drive.findElement(By.xpath("//*[@id=\"react_root\"]/main/div[2]/div/div/div/div/div/main/div/div[1]/section[1]/header/div[2]/span[1]/span/span[1]")).getText(); 
+                if (port.contains("+")) {
+		            room.setState(State.builder().color(Color.of(java.awt.Color.BLUE)).on());
+		            room.setBrightness(254); 
+                    System.out.println(port); 
+                } 
+                else if (port.contains("-")) { 
+                    room.setState(State.builder().color(Color.of(117, 2 , 253)).on()); 
+                    room.setBrightness(254);
+		            System.out.println(port);
 		
 		}
 		
